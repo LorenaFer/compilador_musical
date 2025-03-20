@@ -84,6 +84,82 @@ Semicorchea  ->  1/16  -> 120
 Cada nota se escribe con su letra asignada correspondiente (C, D, E), su octava (4 , 5) y su duracion (Negra, blanca, corchea).
 ```
 
+## Ejemplos de Uso
+
+### Ejemplo 1: Notas Básicas y Alteraciones
+```mus
+// Configuración inicial del compás
+Tempo 120
+Compas 4/4
+
+// Definición de tonalidad
+Tonalidad Do M
+
+// Secuencia de notas con diferentes duraciones
+Do4 Negra
+Re4 Corchea
+Mi4 Blanca
+Fa4 Semicorchea
+Sol4 Negra
+La4 Corchea
+Si4 Blanca
+
+// Notas con alteraciones
+Do#4 Negra
+Reb4 Corchea
+Mi♭4 Blanca
+
+// Usando notación alternativa (inglesa)
+C4 Negra
+D4 Corchea
+E4 Blanca
+F#4 Negra
+Gb4 Corchea 
+```
+
+### Ejemplo 2: Compases y Tonalidades
+```mus
+// Prueba de diferentes compases y tempos
+Tempo 80
+Compas 3/4
+
+// Cambio de tonalidad a menor
+Tonalidad La m
+
+// Secuencia rápida de semicorcheas
+Do4 Semicorchea
+Re4 Semicorchea
+Mi4 Semicorchea
+Fa4 Semicorchea
+Sol4 Semicorchea
+La4 Semicorchea
+Si4 Semicorchea
+Do5 Semicorchea
+
+// Mezcla de duraciones
+Do4 Blanca
+Re4 Negra
+Mi4 Corchea
+Fa4 Semicorchea
+
+// Prueba de alteraciones consecutivas
+Do#4 Negra
+Do#4 Corchea
+Reb4 Negra
+Mib4 Blanca
+Fa#4 Corchea
+Sol♭4 Semicorchea
+
+// Mezcla de notación latina e inglesa
+Do4 Negra
+D4 Negra
+Mi4 Negra
+F4 Negra
+Sol4 Negra
+A4 Negra
+Si4 Negra 
+```
+
 ## Equipo
 - Lorena
 - Julio
