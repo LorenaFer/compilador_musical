@@ -1,0 +1,19 @@
+Tonalidad C
+Tempo 120
+Compas 4/4
+
+// Prueba de notas en notación inglesa
+C4 D#4 E4 Fb4 G4 A#4 B4
+
+// Prueba de notas en notación latina
+Do4 Re#4 Mi4 Fab4 Sol4 La#4 Si4
+
+// Prueba de figuras musicales
+Blanca Negra Corchea Semicorchea
+
+// Prueba de acordes mayores y menores
+M m
+
+// Casos inválidos (no deberían ser reconocidos como notas completas)
+X4 Yb4 Z#4
+Test123 

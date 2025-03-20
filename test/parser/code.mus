@@ -1,0 +1,20 @@
+// Configuración básica de la pieza musical
+Tempo 120
+Compas 4/4
+Tonalidad Do M
+
+// Secuencia simple de notas
+Do4 Negra
+Re4 Corchea
+Mi4 Blanca
+Fa4 Semicorchea
+
+// Notas con alteraciones
+Do#4 Negra
+Reb4 Corchea
+
+// Notación alternativa (inglesa)
+C4 Negra
+D4 Corchea
+E4 Blanca
+F#4 Negra 

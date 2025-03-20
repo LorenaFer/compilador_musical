@@ -1,5 +1,5 @@
 %{
-#include <token.h>
+#include "token.h"
 %}
 
 ESPACIO     [ \t\n]
@@ -41,8 +41,8 @@ ALTER       "b"|"#"|"♭"
 "#"             { return TOKEN_SOSTENIDO; }
 "b"|"♭"         { return TOKEN_BEMOL; }
 
-("C"|"D"|"E"|"F"|"G"|"A"|"B")[#b]?[0-9] { return TOKEN_NOTA_COMPLETA; }
-("Do"|"Re"|"Mi"|"Fa"|"Sol"|"La"|"Si")[#b]?[0-9] { return TOKEN_NOTA_COMPLETA; }
+("C"|"D"|"E"|"F"|"G"|"A"|"B")[#b♭]?[0-9] { return TOKEN_NOTA_COMPLETA; }
+("Do"|"Re"|"Mi"|"Fa"|"Sol"|"La"|"Si")[#b♭]?[0-9] { return TOKEN_NOTA_COMPLETA; }
 
 [a-zA-Z_][a-zA-Z0-9_]* { return TOKEN_IDENTIFIER; }
 
