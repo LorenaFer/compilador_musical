@@ -48,19 +48,9 @@ make
 ## Uso y Pruebas
 El proyecto actualmente está en desarrollo. Por el momento, puedes encontrar ejemplos del lenguaje musical en la carpeta `test/`:
 
-- `test1.mus`: Contiene ejemplos básicos de la sintaxis del lenguaje
-- `test2.mus`: Contiene ejemplos más avanzados de composición musical
+- `code.mus`: Contiene ejemplos básicos de la sintaxis del lenguaje
 
-Para examinar estos archivos de prueba:
-```bash
-cat test/test1.mus  # Ver el contenido del primer archivo de prueba
-cat test/test2.mus  # Ver el contenido del segundo archivo de prueba
-```
-
-La funcionalidad de generación de archivos MIDI está en desarrollo. Próximamente se podrá usar el compilador de la siguiente manera:
-```bash
-./compilador_musical archivo.mus -o salida.midi
-```
+La funcionalidad de generación de archivos MIDI está en desarrollo.
 
 ## Sintaxis del Lenguaje Musical
 ```
