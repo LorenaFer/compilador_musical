@@ -7,11 +7,11 @@ Este proyecto implementa un compilador que traduce un lenguaje de dominio espec�
 ```
 .
 ├── src/                  # Archivos de implementación (.cpp)
-│   ├── scanner/         # Implementación del analizador léxico
-│   └── parser/          # Implementación del analizador sintáctico
+│   ├── scanner/         # (-)
+│   └── parser/          # (-)
 ├── include/             # Archivos de cabecera (.h)
-│   ├── scanner/         # Cabeceras del analizador léxico
-│   └── parser/          # Cabeceras del analizador sintáctico
+│   ├── scanner/         # Cabeceras e implementación del analizador léxico
+│   └── parser/          # Cabeceras e implementación del analizador sintáctico
 └── test/               # Archivos de prueba y ejemplos del lenguaje musical (.mus)
 ```
 
