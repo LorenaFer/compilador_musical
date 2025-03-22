@@ -15,9 +15,27 @@ Este proyecto implementa un compilador que traduce un lenguaje de dominio espec�
 └── test/               # Archivos de prueba y ejemplos del lenguaje musical (.mus)
 ```
 
-## Requisitos
-- Compilador C++ (C++11 o superior)
-- CMake (para la construcción del proyecto)
+##Definiciones Musicales
+¿Qué es una tonalidad?
+
+La tonalidad establece un "centro de gravedad" musical, una nota principal llamada tónica. Todas las demás notas y acordes de la canción se relacionan con esta tónica, creando una sensación de cohesión y unidad.
+
+Marco armónico:
+Define qué notas "suenan bien" juntos en una canción. La tonalidad establece una escala, una secuencia específica de notas, que sirve como base para la melodía y la armonía.
+
+¿Qué hacen las alteraciones?
+
+Las alteraciones permiten a los músicos tocar notas que no están en la escala diatónica básica
+Hacen que una nota sea más aguda (más alta) o más grave (más baja)
+
+Tipos principales de alteraciones:
+
+Sostenido (#):
+Eleva la altura de una nota en un semitono.
+Por ejemplo, Do# es un semitono más alto que Do.
+Bemol (b):
+Reduce la altura de una nota en un semitono.
+Por ejemplo, Reb es un semitono más bajo que Re.
 
 ## Compilación
 ```bash
