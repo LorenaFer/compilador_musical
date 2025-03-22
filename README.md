@@ -37,12 +37,11 @@ Bemol (b):
 Reduce la altura de una nota en un semitono.
 Por ejemplo, Reb es un semitono más bajo que Re.
 
-## Compilación
+## Compilación y prueba
+selecciona la carpeta del componente del compilador al que se quiere someter a prueba e ingresa.
 ```bash
-mkdir build
-cd build
-cmake ..
-make
+make all
+make test
 ```
 
 ## Uso y Pruebas
