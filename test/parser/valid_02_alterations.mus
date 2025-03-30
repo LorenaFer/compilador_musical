@@ -1,0 +1,15 @@
+// Caso válido 2: Notas con alteraciones (sostenidos y bemoles)
+Tempo 100
+Compas 3/4
+Tonalidad Re M
+
+// Notas con sostenidos
+Do#4 Negra
+Fa#4 Blanca
+Sol#4 Corchea
+
+// Notas con bemoles
+Reb4 Semicorchea
+Mib4 Negra
+Lab4 Corchea
+Sib4 Blanca 

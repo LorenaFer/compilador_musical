@@ -1,0 +1,25 @@
+// Caso válido 3: Notas en diferentes octavas
+Tempo 80
+Compas 4/4
+Tonalidad Sol M
+
+// Octavas bajas
+Do2 Blanca
+Re2 Negra
+Mi2 Corchea
+
+// Octavas medias
+Fa3 Semicorchea
+Sol3 Negra
+La3 Corchea
+
+// Octavas altas
+Si4 Blanca
+Do5 Negra
+Re5 Corchea
+Mi5 Semicorchea
+
+// Secuencia ascendente
+Do3 Negra
+Do4 Corchea
+Do5 Semicorchea 

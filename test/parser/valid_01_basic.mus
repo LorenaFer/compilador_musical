@@ -1,0 +1,13 @@
+// Caso válido 1: Configuración básica y notas simples
+Tempo 120
+Compas 4/4
+Tonalidad Do M
+
+// Notas sin alteraciones
+Do4 Negra
+Re4 Corchea
+Mi4 Blanca
+Fa4 Semicorchea
+Sol4 Negra
+La4 Corchea
+Si4 Blanca 

@@ -1,0 +1,10 @@
+// Caso inválido 1: Falta la configuración de tempo
+// Tempo 120  <- Comentado para generar error
+Compas 4/4
+Tonalidad Do M
+
+// Notas básicas
+Do4 Negra
+Re4 Corchea
+Mi4 Blanca
+Fa4 Semicorchea 

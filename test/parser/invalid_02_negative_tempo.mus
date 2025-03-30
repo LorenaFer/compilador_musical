@@ -1,0 +1,9 @@
+// Caso inválido 2: Tempo con valor negativo
+Tempo -60  // Debe ser un valor positivo
+Compas 4/4
+Tonalidad Re M
+
+// Notas básicas
+Do4 Negra
+Re4 Corchea
+Mi4 Blanca 

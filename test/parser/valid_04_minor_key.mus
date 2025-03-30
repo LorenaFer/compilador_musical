@@ -1,0 +1,23 @@
+// Caso válido 4: Uso de tonalidad menor
+Tempo 70
+Compas 3/4
+Tonalidad La m
+
+// Progresión típica de tonalidad menor
+La3 Blanca
+Do4 Negra
+Mi4 Blanca
+Sol4 Corchea
+Si4 Semicorchea
+
+// Notas alteradas en contexto menor
+Fa#4 Negra
+Sol#4 Corchea
+Si4 Blanca
+
+// Secuencia descendente
+Mi4 Negra
+Re4 Negra
+Do4 Negra
+Si3 Negra
+La3 Blanca 

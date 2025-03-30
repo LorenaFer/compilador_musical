@@ -1,0 +1,9 @@
+// Caso inválido 3: Denominador del compás igual a cero
+Tempo 120
+Compas 4/0  // El denominador debe ser positivo
+Tonalidad Sol M
+
+// Notas básicas
+Do4 Negra
+Re4 Corchea
+Mi4 Blanca 
