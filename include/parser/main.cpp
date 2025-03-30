@@ -16,19 +16,26 @@ void print_help() {
 }
 
 int main(int argc, char** argv) {
-    // Activar depuración
-    yydebug = 1;
-
-    if (argc > 1 && (strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0)) {
-        print_help();
-        return 0;
+    // Desactivar completamente la depuración
+    yydebug = 0;
+    
+    // Procesar argumentos
+    char* filename = NULL;
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(argv[i], "--help") == 0 || strcmp(argv[i], "-h") == 0) {
+            print_help();
+            return 0;
+        } else if (filename == NULL) {
+            // Primer argumento no reconocido se toma como nombre de archivo
+            filename = argv[i];
+        }
     }
 
-    // Si hay argumento, es el nombre del archivo
-    if (argc > 1) {
-        FILE* file = fopen(argv[1], "r");
+    // Abrir archivo si se proporcionó
+    if (filename != NULL) {
+        FILE* file = fopen(filename, "r");
         if (!file) {
-            printf("Error: No se pudo abrir el archivo %s\n", argv[1]);
+            printf("Error: No se pudo abrir el archivo %s\n", filename);
             return 1;
         }
         yyin = file;
@@ -37,24 +44,33 @@ int main(int argc, char** argv) {
         yyin = stdin;
     }
 
+    // Parsear el archivo
     int result = yyparse();
     
     // Cerrar el archivo si se abrió uno
-    if (argc > 1 && yyin != NULL) {
+    if (filename != NULL && yyin != NULL) {
         fclose(yyin);
     }
 
     if (result != 0 || parser_result != 0) {
-        printf("Error de parseo\n");
+        // Mostrar error con formato simple
+        const char* basename = filename ? strrchr(filename, '/') : NULL;
+        basename = basename ? basename + 1 : filename;
+        printf("❌ Error: El archivo %s contiene errores de sintaxis o configuración.\n", 
+               basename ? basename : "entrada");
         return 1;
     }
 
     if (program_result) {
-        printf("Programa musical analizado correctamente:\n");
-        printf("%s\n", program_result->to_string().c_str());
+        // Salida simplificada para éxito
+        const char* basename = filename ? strrchr(filename, '/') : NULL;
+        basename = basename ? basename + 1 : filename;
+        printf("✅ Archivo %s procesado correctamente.\n", basename ? basename : "entrada");
         
-        printf("Validación de configuración: %s\n", 
-               program_result->validate() ? "Completa" : "Incompleta");
+        // Solo mostrar si hubo éxito en la validación
+        if (program_result->validate()) {
+            printf("✓ Configuración completa.\n");
+        }
         
         program_result->destroy();
         delete program_result;

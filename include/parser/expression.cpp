@@ -1,4 +1,7 @@
 #include "expression.hpp"
+#include <sstream>
+
+extern bool yydebug;
 
 using namespace std::literals;
 
@@ -18,25 +21,25 @@ bool Configuration::isComplete() const noexcept {
 }
 
 std::string Configuration::to_string() const noexcept {
-    std::string result = "Configuration(tempo_set: "s + (tempo_set ? "true" : "false") + 
-                         ", time_signature_set: "s + (time_signature_set ? "true" : "false") +
-                         ", key_set: "s + (key_set ? "true" : "false");
+    std::stringstream ss;
+    ss << "Configuration(tempo_set: " << (tempo_set ? "true" : "false") 
+       << ", time_signature_set: " << (time_signature_set ? "true" : "false")
+       << ", key_set: " << (key_set ? "true" : "false");
     
     if (tempo_set) {
-        result += ", tempo: " + std::to_string(tempo_value);
+        ss << ", tempo: " << tempo_value;
     }
     
     if (time_signature_set) {
-        result += ", time_signature: " + std::to_string(time_signature_num) + "/" + 
-                 std::to_string(time_signature_den);
+        ss << ", time_signature: " << time_signature_num << "/" << time_signature_den;
     }
     
     if (key_set) {
-        result += ", key: " + key_note + " " + key_mode;
+        ss << ", key: " << key_note << " " << key_mode;
     }
     
-    result += ")"s;
-    return result;
+    ss << ")"s;
+    return ss.str();
 }
 
 bool Configuration::hasTempo() const noexcept {
@@ -52,25 +55,44 @@ bool Configuration::hasKey() const noexcept {
 }
 
 void Configuration::setTempo(int bpm) noexcept {
+    if (bpm <= 0 && yydebug) {
+        fprintf(stderr, "ERROR: El tempo debe ser positivo\n");
+    }
+    
     tempo_set = true;
     tempo_value = bpm;
+    
+    if (!yydebug) return;
+    fprintf(stderr, "DEBUG: Configuración: tempo establecido a %d\n", bpm);
 }
 
 void Configuration::setTimeSignature(int numerator, int denominator) noexcept {
+    if (numerator <= 0 && yydebug) {
+        fprintf(stderr, "ERROR: El numerador del compás debe ser positivo\n");
+    }
+    if (denominator <= 0 && yydebug) {
+        fprintf(stderr, "ERROR: El denominador del compás debe ser positivo\n");
+    }
+    
     time_signature_set = true;
     time_signature_num = numerator;
     time_signature_den = denominator;
+    
+    if (!yydebug) return;
+    fprintf(stderr, "DEBUG: Configuración: compás establecido a %d/%d\n", numerator, denominator);
 }
 
 void Configuration::setKey(const std::string& note, const std::string& mode) noexcept {
     key_set = true;
     key_note = note;
     key_mode = mode;
+    
+    if (!yydebug) return;
+    fprintf(stderr, "DEBUG: Configuración: tonalidad establecida a %s %s\n", note.c_str(), mode.c_str());
 }
 
 // Tempo
 Tempo::Tempo(int bpm) noexcept : bpm(bpm) {
-    tempo_set = true;
     setTempo(bpm);
 }
 
@@ -89,7 +111,6 @@ int Tempo::getValue() const noexcept {
 // TimeSignature
 TimeSignature::TimeSignature(int numerator, int denominator) noexcept
     : numerator(numerator), denominator(denominator) {
-    time_signature_set = true;
     setTimeSignature(numerator, denominator);
 }
 
@@ -112,7 +133,6 @@ int TimeSignature::getDenominator() const noexcept {
 // Key
 Key::Key(const std::string& note, const std::string& mode) noexcept
     : note(note), mode(mode) {
-    key_set = true;
     setKey(note, mode);
 }
 
@@ -134,18 +154,26 @@ std::string Key::getMode() const noexcept {
 
 // MusicProgram
 MusicProgram::MusicProgram(Configuration* config) noexcept
-    : configuration(config) {}
+    : configuration(config) {
+    if (!yydebug) return;
+    fprintf(stderr, "DEBUG: Programa musical creado\n");
+}
 
 void MusicProgram::destroy() noexcept {
     if (configuration) {
         configuration->destroy();
         delete configuration;
         configuration = nullptr;
+        
+        if (!yydebug) return;
+        fprintf(stderr, "DEBUG: Programa musical destruido\n");
     }
 }
 
 std::string MusicProgram::to_string() const noexcept {
-    return "MusicProgram("s + (configuration ? configuration->to_string() : "null") + ")"s;
+    std::stringstream ss;
+    ss << "MusicProgram(" << (configuration ? configuration->to_string() : "null") << ")";
+    return ss.str();
 }
 
 bool MusicProgram::validate() const noexcept {
@@ -158,10 +186,25 @@ Configuration* MusicProgram::getConfiguration() const noexcept {
 
 // Note
 Note::Note(const std::string& name, const std::string& alteration, int octave, const std::string& duration) noexcept
-    : name(name), alteration(alteration), octave(octave), duration(duration) {}
+    : name(name), alteration(alteration), octave(octave), duration(duration) {
+    if (!yydebug) return;
+    fprintf(stderr, "DEBUG: Nota creada: %s%s%d con duración %s\n", 
+            name.c_str(), alteration.c_str(), octave, duration.c_str());
+}
 
-void Note::destroy() noexcept {}
+void Note::destroy() noexcept {
+    if (!yydebug) return;
+    fprintf(stderr, "DEBUG: Nota destruida\n");
+}
 
 std::string Note::to_string() const noexcept {
-    return "Note("s + name + alteration + std::to_string(octave) + " " + duration + ")"s;
+    std::stringstream ss;
+    ss << "Note(" << name;
+    
+    if (!alteration.empty()) {
+        ss << alteration;
+    }
+    
+    ss << octave << ", duration: " << duration << ")";
+    return ss.str();
 } 
