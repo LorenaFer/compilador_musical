@@ -1,38 +1,55 @@
-CXX = g++
-FLEX = flex
-BISON = bison --defines=token.h
-INCLUDE_DIR = ../
-SCANNER_DIR = ../scanner
-CXXFLAGS = -I$(INCLUDE_DIR)
+# Compilador y flags
+CC = g++
+CFLAGS = -g -Wall -std=c++17
 
-all: music_parser
+# Nombres de los archivos generados
+PARSER = parser.tab.c
+PARSER_HEADER = parser.tab.h
+SCANNER = lex.yy.c
 
-music_parser: parser.o scanner.o main.o
-	$(CXX) scanner.o parser.o main.o -o music_parser
+# Rutas
+TEST_DIR = ../../test/parser
 
-parser.o: parser.c
-	$(CXX) $(CXXFLAGS) -c parser.c
+# Target por defecto
+all: parser
 
-parser.c: parser.bison
-	$(BISON) -v --output parser.c parser.bison
+# Compilación del parser
+$(PARSER) $(PARSER_HEADER): parser.bison
+	bison -d -o $(PARSER) parser.bison
 
-token.h: parser.bison
-	$(BISON) --defines=token.h --output=parser.c parser.bison
+# Compilación del scanner
+$(SCANNER): scanner.flex $(PARSER_HEADER)
+	flex -o $(SCANNER) scanner.flex
 
-scanner.c: $(SCANNER_DIR)/scanner.flex token.h
-	cp $(SCANNER_DIR)/scanner.flex .
-	$(FLEX) -o scanner.c scanner.flex
-	rm scanner.flex
+# Compilación del programa principal
+parser: $(SCANNER) $(PARSER) expression.cpp main.cpp
+	$(CC) $(CFLAGS) -o parser $(SCANNER) $(PARSER) expression.cpp main.cpp
 
-scanner.o: token.h scanner.c
-	$(CXX) $(CXXFLAGS) -c scanner.c
-
-main.o: token.h main.c
-	$(CXX) $(CXXFLAGS) -c main.c
-
-.PHONY: clean test
+# Limpieza
 clean:
-	$(RM) *.o parser.c parser.output token.h scanner.c music_parser scanner.flex
+	rm -f parser $(SCANNER) $(PARSER) $(PARSER_HEADER) *.o
 
-test: music_parser
-	./music_parser ../../test/parser/code.mus 
+# Ejecución de pruebas
+test: parser
+	./parser $(TEST_DIR)/code.mus
+
+# Ejecutar todas las pruebas
+test_all: test_valid test_invalid
+
+# Ejecutar todas las pruebas válidas
+test_valid: parser
+	@echo "\n\n======= CASOS VÁLIDOS =======\n"
+	@for file in $(TEST_DIR)/valid_*; do \
+		echo "\n----- Probando: $${file} -----"; \
+		./parser $${file}; \
+	done
+
+# Ejecutar todas las pruebas inválidas
+test_invalid: parser
+	@echo "\n\n======= CASOS INVÁLIDOS =======\n"
+	@for file in $(TEST_DIR)/invalid_*; do \
+		echo "\n----- Probando: $${file} -----"; \
+		./parser $${file} || echo "Test de invalidez exitoso en $${file}"; \
+	done
+
+.PHONY: all clean test test_all test_valid test_invalid 
