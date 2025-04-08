@@ -1,6 +1,7 @@
 /examples/*
 # Archivos de sistema macOS
 .DS_Store
+/include/.DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
