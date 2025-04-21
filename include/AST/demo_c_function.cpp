@@ -7,7 +7,7 @@
 
 int main()
 {
-    // Creación del AST para una composición musical basada en los ejemplos válidos proporcionados
+    // Creación del AST para compilacion musical
     Body composicion_body{
         new DeclarationStatement{            // --> Declaración de tempo
             new TempoDeclaration{
@@ -155,7 +155,7 @@ int main()
         }
     };
     
-    // Usamos el constructor de FunctionDeclaration con el tipo de función y el cuerpo, con un nombre vacío
+    // se usa el constructor de FunctionDeclaration con el tipo de función y el cuerpo, con un nombre vacío
     auto composicion = new FunctionDeclaration{
         "",  // Nombre vacío para reflejar la gramática original
         new FunctionDatatype{new VoidDatatype{}, ParamList{}},
@@ -176,9 +176,8 @@ int main()
 }
 
 /*
- * Esta función crea un AST para una composición musical sencilla con la
- * siguiente estructura:
- * - Tempo: 120 BPM
+ * Esta función crea un AST para una composición musical sencilla con la siguiente estructura:
+ * - Tempo: 120 
  * - Compás: 4/4
  * - Tonalidad: D Mayor
  * - Secuencia de notas con sus duraciones
