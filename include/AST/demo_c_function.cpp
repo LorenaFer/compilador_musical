@@ -164,9 +164,9 @@ int main()
 
     // Imprimir la representación del AST
     std::cout << "Representación del AST para una composición musical:" << std::endl;
-    std::cout << "=================================================" << std::endl;
+    std::cout << "==================================================" << std::endl;
     std::cout << composicion->to_string() << std::endl;
-    std::cout << "=================================================" << std::endl;
+    std::cout << "==================================================" << std::endl;
 
     // Liberar memoria
     composicion->destroy();
