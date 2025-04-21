@@ -65,9 +65,9 @@ std::pair<bool, Datatype*> body_type_check(const Body& body) noexcept{
     return std::make_pair(true, nullptr);
 }
 
-bool resolve_name_body(Body& body, SymbolTable& symbol_table) noexcept{
+bool resolve_name_body(Body& body, SymbolTable& symbol_table) noexcept{ //registro de variables en la tabla de simbolos
     static bool is_first_call = true;
-    if (is_first_call) {
+    if (is_first_call) { //recorrido de todos los statements en un bloque de codigo
         visited_nodes.clear();
         is_first_call = false;
     }
@@ -160,7 +160,7 @@ std::pair<bool, Datatype*> param_list_type_check(const ParamList& param_list) no
     return std::make_pair(true, nullptr);
 }
 
-bool resolve_name_param_list(const ParamList& param_list, SymbolTable& symbol_table) noexcept{
+bool resolve_name_param_list(const ParamList& param_list, SymbolTable& symbol_table) noexcept{ //registro de parametros en la tabla de simbolos
     for (const Param& param : param_list){
         auto symbol = Symbol::build(param.second, param.first);
 
